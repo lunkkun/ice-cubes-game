@@ -4,6 +4,7 @@ extends Control
 signal undo_button_pressed
 signal reset_button_pressed
 signal next_button_pressed
+signal menu_button_pressed
 
 var _moves = 0
 var _previous_best = 0
@@ -28,10 +29,12 @@ func _reset():
 	_update_moves_label()
 
 
-func _on_World_level_loaded(level_id: int, previous_best: int = 0):
+func set_level(level_id: int, previous_best: int = 0):
 	_reset()
 	
 	_level_label.text = "Level: %d" % level_id
+	_level_label.show()
+	_moves_label.show()
 	
 	_previous_best = previous_best
 	_update_previous_best_label()
@@ -42,6 +45,23 @@ func _on_World_level_loaded(level_id: int, previous_best: int = 0):
 	else:
 		_previous_best_label.hide()
 		_next_button.hide()
+
+
+func show_end():
+	_reset()
+	_level_label.hide()
+	_moves_label.hide()
+	_next_button.hide()
+	_previous_best_label.hide()
+	_message.text = "No more levels..."
+
+
+func _update_moves_label():
+	_moves_label.text = "Moves: %d" % _moves
+
+
+func _update_previous_best_label():
+	_previous_best_label.text = "Previous best: %d" % _previous_best
 
 
 func _on_Level_block_moved():
@@ -94,16 +114,5 @@ func _on_NextButton_pressed():
 	emit_signal("next_button_pressed")
 
 
-func _on_World_end_reached():
-	_reset()
-	_next_button.hide()
-	_previous_best_label.hide()
-	_message.text = "No more levels..."
-
-
-func _update_moves_label():
-	_moves_label.text = "Moves: %d" % _moves
-
-
-func _update_previous_best_label():
-	_previous_best_label.text = "Previous best: %d" % _previous_best
+func _on_MenuButton_pressed():
+	emit_signal("menu_button_pressed")

@@ -1,6 +1,6 @@
 [gd_scene load_steps=7 format=2]
 
-[ext_resource path="res://scenes/world.gd" type="Script" id=1]
+[ext_resource path="res://scenes/menu.tscn" type="PackedScene" id=1]
 [ext_resource path="res://scenes/hud.tscn" type="PackedScene" id=2]
 [ext_resource path="res://scenes/levels/level_intro.tscn" type="PackedScene" id=3]
 [ext_resource path="res://scenes/levels/level_face.tscn" type="PackedScene" id=4]
@@ -9,12 +9,15 @@
 
 [node name="Main" type="Node"]
 script = ExtResource( 5 )
-
-[node name="World" type="Node2D" parent="."]
-script = ExtResource( 1 )
 levels = [ ExtResource( 3 ), ExtResource( 6 ), ExtResource( 4 ) ]
 
+[node name="World" type="Node2D" parent="."]
+
 [node name="HUD" parent="." instance=ExtResource( 2 )]
-[connection signal="end_reached" from="World" to="HUD" method="_on_World_end_reached"]
-[connection signal="level_loaded" from="World" to="HUD" method="_on_World_level_loaded"]
-[connection signal="next_button_pressed" from="HUD" to="World" method="load_next_level"]
+
+[node name="Menu" parent="." instance=ExtResource( 1 )]
+[connection signal="menu_button_pressed" from="HUD" to="." method="_on_HUD_menu_button_pressed"]
+[connection signal="next_button_pressed" from="HUD" to="." method="load_next_level"]
+[connection signal="continue_button_pressed" from="Menu" to="." method="_on_Menu_continue_button_pressed"]
+[connection signal="level_picked" from="Menu" to="." method="_on_Menu_level_picked"]
+[connection signal="new_game_button_pressed" from="Menu" to="." method="_on_Menu_new_game_button_pressed"]
