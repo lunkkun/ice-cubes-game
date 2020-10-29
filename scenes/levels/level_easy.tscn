@@ -1,0 +1,35 @@
+[gd_scene load_steps=5 format=2]
+
+[ext_resource path="res://resources/ice_textures.tres" type="TileSet" id=1]
+[ext_resource path="res://scenes/level.gd" type="Script" id=2]
+[ext_resource path="res://scenes/target.tscn" type="PackedScene" id=3]
+[ext_resource path="res://scenes/block.tscn" type="PackedScene" id=4]
+
+[node name="Level" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="ColorRect" type="ColorRect" parent="."]
+margin_top = 64.0
+margin_right = 576.0
+margin_bottom = 640.0
+mouse_filter = 2
+color = Color( 0.196078, 0.364706, 0.560784, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="TileMap" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+format = 1
+tile_data = PoolIntArray( 196610, 1, 65537, 196611, 1, 65537, 196612, 1, 65537, 196613, 1, 65537, 196614, 1, 65537, 262146, 1, 65537, 262147, 1, 65537, 262148, 1, 65537, 262149, 1, 65537, 262150, 1, 65537, 327682, 1, 65537, 327683, 1, 65537, 327684, 1, 65537, 327685, 1, 65537, 327686, 1, 65537, 393218, 1, 65537, 393219, 1, 65537, 393220, 1, 65537, 393221, 1, 65537, 393222, 1, 65537, 458754, 1, 65537, 458755, 1, 65537, 458756, 1, 65537, 458757, 1, 65537, 458758, 1, 65537, 524290, 1, 131072, 524291, 1, 131073, 524292, 1, 131073, 524293, 1, 131073, 524294, 1, 131074 )
+
+[node name="Target" parent="." instance=ExtResource( 3 )]
+
+[node name="Block" parent="." instance=ExtResource( 4 )]
+position = Vector2( 160, 288 )
+
+[node name="Block2" parent="." instance=ExtResource( 4 )]
+position = Vector2( 352, 288 )
+
+[node name="Block3" parent="." instance=ExtResource( 4 )]
+position = Vector2( 288, 480 )
