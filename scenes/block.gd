@@ -12,9 +12,10 @@ const DIRECTION = {
 	DOWN = Vector2(0, 1),
 }
 
-export var selected = false setget set_selected
 export var max_speed = 800.0
 export var seconds_to_max_speed = 0.5
+
+var selected = false setget set_selected
 
 var _speed = 0.0
 var _velocity: Vector2
