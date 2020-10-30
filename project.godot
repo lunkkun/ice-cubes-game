@@ -43,7 +43,6 @@ gdscript/warnings/unsafe_call_argument=true
 
 window/size/width=576
 window/size/height=640
-window/size/resizable=false
 
 [gdnative]
 
