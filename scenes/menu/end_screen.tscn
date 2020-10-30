@@ -1,0 +1,110 @@
+[gd_scene load_steps=6 format=2]
+
+[ext_resource path="res://scenes/menu/end_screen.gd" type="Script" id=1]
+[ext_resource path="res://assets/textures/icecube.png" type="Texture" id=2]
+[ext_resource path="res://assets/fonts/JosefinSans-Light.ttf" type="DynamicFontData" id=3]
+
+[sub_resource type="DynamicFont" id=1]
+size = 46
+extra_spacing_top = 5
+extra_spacing_char = 4
+font_data = ExtResource( 3 )
+
+[sub_resource type="DynamicFont" id=2]
+size = 30
+font_data = ExtResource( 3 )
+
+[node name="EndScreen" type="Control"]
+anchor_right = 1.0
+anchor_bottom = 1.0
+script = ExtResource( 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+color = Color( 0.0392157, 0.145098, 0.470588, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchor_right = 1.0
+anchor_bottom = 1.0
+margin_left = 32.0
+margin_top = 32.0
+margin_right = -32.0
+margin_bottom = -32.0
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+margin_right = 512.0
+margin_bottom = 576.0
+
+[node name="TextContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+margin_right = 512.0
+margin_bottom = 217.0
+
+[node name="EndText" type="Label" parent="MarginContainer/VBoxContainer/TextContainer"]
+margin_left = 63.0
+margin_right = 448.0
+margin_bottom = 217.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.721569, 0.960784, 0.960784, 1 )
+text = "Congratulations!
+You've beaten
+all levels of
+"
+align = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 221.0
+margin_right = 512.0
+margin_bottom = 285.0
+custom_constants/separation = 34
+alignment = 1
+
+[node name="Logo" type="TextureRect" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 96.0
+margin_right = 160.0
+margin_bottom = 64.0
+texture = ExtResource( 2 )
+stretch_mode = 1
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer/HBoxContainer"]
+margin_left = 194.0
+margin_right = 415.0
+margin_bottom = 64.0
+
+[node name="Title" type="Label" parent="MarginContainer/VBoxContainer/HBoxContainer/CenterContainer"]
+margin_top = 6.0
+margin_right = 221.0
+margin_bottom = 58.0
+custom_fonts/font = SubResource( 1 )
+custom_colors/font_color = Color( 0.721569, 0.960784, 0.960784, 1 )
+text = "Ice Cubes"
+
+[node name="CenterContainer" type="CenterContainer" parent="MarginContainer/VBoxContainer"]
+margin_top = 289.0
+margin_right = 512.0
+margin_bottom = 576.0
+size_flags_vertical = 3
+
+[node name="BackToMenuButton" type="ToolButton" parent="MarginContainer/VBoxContainer/CenterContainer"]
+margin_left = 162.0
+margin_top = 124.0
+margin_right = 349.0
+margin_bottom = 163.0
+focus_mode = 0
+custom_fonts/font = SubResource( 2 )
+custom_colors/font_color_disabled = Color( 0.172549, 0.203922, 0.309804, 1 )
+custom_colors/font_color = Color( 0.721569, 0.960784, 0.960784, 1 )
+custom_colors/font_color_hover = Color( 0.870588, 1, 0.839216, 1 )
+custom_colors/font_color_pressed = Color( 0.0745098, 0.329412, 0.235294, 1 )
+enabled_focus_mode = 0
+text = "Back to menu"
+[connection signal="pressed" from="MarginContainer/VBoxContainer/CenterContainer/BackToMenuButton" to="." method="_on_BackToMenuButton_pressed"]

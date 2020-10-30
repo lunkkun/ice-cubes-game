@@ -33,8 +33,6 @@ func set_level(level_id: int, previous_best: int = 0):
 	_reset()
 	
 	_level_label.text = "Level: %d" % level_id
-	_level_label.show()
-	_moves_label.show()
 	
 	_previous_best = previous_best
 	_update_previous_best_label()
@@ -45,15 +43,6 @@ func set_level(level_id: int, previous_best: int = 0):
 	else:
 		_previous_best_label.hide()
 		_next_button.hide()
-
-
-func show_end():
-	_reset()
-	_level_label.hide()
-	_moves_label.hide()
-	_next_button.hide()
-	_previous_best_label.hide()
-	_message.text = "No more levels..."
 
 
 func _update_moves_label():

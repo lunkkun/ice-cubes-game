@@ -5,8 +5,8 @@ const SAVE_FILE_PATH = "user://savedata.save"
 
 export(Array, PackedScene) var levels = []
 
-var _save_file_exists = false
 var _level_id = 0
+var _save_file_exists = false
 var _best_per_level = []
 var _level: Level
 
@@ -14,17 +14,14 @@ onready var _encryption_key = OS.get_unique_id() + ProjectSettings.get_setting("
 onready var _world = $World
 onready var _hud = $HUD
 onready var _menu = $Menu
+onready var _end_screen = $EndScreen
 
 
 func _ready():
+	_load_save_file()
+	
 	_menu.nr_levels = levels.size()
 	_menu.best_per_level = _best_per_level
-	_load_save_file()
-
-
-func load_next_level():
-	_level_id += 1
-	_load_level()
 
 
 func get_previous_best():
@@ -39,13 +36,7 @@ func set_previous_best(moves):
 		_best_per_level.resize(_level_id + 1)
 	
 	_best_per_level[_level_id] = moves
-
-
-func _load_level_from_menu(level_id):
-	_level_id = level_id
-	_load_level()
-	
-	_menu.hide()
+	_menu.best_per_level = _best_per_level
 
 
 func _load_level():
@@ -56,7 +47,7 @@ func _load_level():
 		
 	if _level_id >= levels.size():
 		print("no more levels")
-		_hud.show_end()
+		_end_screen.show()
 		return
 	
 	var packed = levels[_level_id]
@@ -92,8 +83,7 @@ func _load_save_file():
 		
 		var save_data = parse_json(save_file.get_line())
 		
-		for score in save_data.scores:
-			_best_per_level.append(score)
+		_best_per_level = save_data.scores
 		
 		print("save file loaded")
 		
@@ -132,6 +122,11 @@ func _on_HUD_menu_button_pressed():
 		_world.remove_child(_level)
 
 
+func _on_HUD_next_button_pressed():
+	_level_id += 1
+	_load_level()
+
+
 func _on_Menu_continue_button_pressed():
 	print("continue")
 	if _level:
@@ -147,13 +142,24 @@ func _on_Menu_continue_button_pressed():
 func _on_Menu_new_game_button_pressed():
 	print("new game")
 	_best_per_level.clear()
-	call_deferred("_save_game")
+	_menu.best_per_level = _best_per_level
 	
-	_load_level_from_menu(0)
+	_level_id = 0
+	_load_level()
+	_menu.hide()
+	
+	call_deferred("_save_game")
 
 
 func _on_Menu_level_picked(level_id):
+	_level_id = level_id
+	_load_level()
+	_menu.hide()
+	
 	if not _save_file_exists:
 		call_deferred("_save_game")
-	
-	_load_level_from_menu(level_id)
+
+
+func _on_EndScreen_back_to_menu_button_pressed():
+	_menu.show()
+	_end_screen.hide()
