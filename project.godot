@@ -9,18 +9,12 @@
 config_version=4
 
 _global_script_classes=[ {
-"base": "",
-"class": "GitAPI",
-"language": "NativeScript",
-"path": "res://git_api.gdns"
-}, {
 "base": "Node2D",
 "class": "Level",
 "language": "GDScript",
 "path": "res://scenes/level.gd"
 } ]
 _global_script_class_icons={
-"GitAPI": "",
 "Level": ""
 }
 
@@ -29,6 +23,7 @@ _global_script_class_icons={
 config/name="Ice Cubes"
 run/main_scene="res://main.tscn"
 config/icon="res://assets/textures/icecube.png"
+config/windows_native_icon="res://assets/icecube.ico"
 
 [debug]
 
@@ -46,7 +41,7 @@ window/size/height=640
 
 [gdnative]
 
-singletons=[ "res://git_api.gdnlib" ]
+singletons=[  ]
 
 [input]
 
